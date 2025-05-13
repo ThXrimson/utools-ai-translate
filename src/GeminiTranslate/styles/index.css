@@ -1,0 +1,526 @@
+.gemini-translate {
+  padding: 0;
+  background-color: var(--md-background);
+  min-height: 100vh;
+}
+
+/* 应用栏 */
+.app-bar {
+  background-color: var(--md-primary);
+  color: white;
+  padding: 12px 20px;
+  /* 减小内边距 */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.app-bar .material-icons {
+  color: white;
+}
+
+.app-bar h1 {
+  margin: 0;
+  font-size: 24px;
+  /* 增大标题字号 */
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  /* 增加字母间距 */
+}
+
+/* Material Design 按钮 */
+.md-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 16px;
+  height: 36px;
+  border: none;
+  border-radius: 4px;
+  font-size: 15px;
+  /* 增大按钮文字 */
+  font-weight: 500;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: transparent;
+  color: inherit;
+}
+
+.md-button.primary {
+  background-color: var(--md-primary);
+  color: white;
+}
+
+.md-button.elevated {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.md-button:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.md-button.primary:hover {
+  background-color: var(--md-primary-dark);
+}
+
+.md-button:disabled {
+  background-color: rgba(0, 0, 0, 0.12);
+  color: rgba(0, 0, 0, 0.38);
+  cursor: not-allowed;
+}
+
+/* Material Design 文本框 */
+.md-textarea {
+  width: 100%;
+  padding: 16px;
+  border: none;
+  border-radius: 4px;
+  font-size: 15px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.5;
+  color: rgba(0, 0, 0, 0.87);
+  background: var(--md-surface);
+  resize: vertical;
+  transition: box-shadow 0.2s;
+  box-sizing: border-box;
+  /* 添加这行确保padding不会导致宽度溢出 */
+  min-height: 120px;
+  /* 设置最小高度 */
+  max-height: 400px;
+  /* 设置最大高度 */
+}
+
+.input-area {
+  margin: 0 auto 24px;
+  max-width: 700px;
+  position: relative;
+  /* 添加相对定位 */
+  overflow: hidden;
+  /* 防止内容溢出 */
+  background: var(--md-surface);
+  border-radius: 4px;
+}
+
+.md-textarea:focus {
+  outline: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* 容器布局 */
+.translate-container {
+  max-width: 700px;
+  /* 减小最大宽度 */
+  margin: 20px auto;
+  /* 减小上下边距 */
+  padding: 0 20px;
+  /* 减小左右内边距 */
+}
+
+.input-area {
+  margin: 0 auto 16px;
+  /* 减小底部间距 */
+  max-width: 700px;
+}
+
+.output-area {
+  margin-top: 24px;
+  /* 减小与翻译按钮的间距 */
+}
+
+/* 翻译按钮区域 */
+.action-area {
+  text-align: center;
+  margin: 20px 0;
+  /* 减小上下间距 */
+}
+
+.action-area .material-icons {
+  color: white;
+}
+
+/* 翻译结果区域 */
+.translation-section {
+  background: var(--md-surface);
+  padding: 24px;
+  /* 减小内边距 */
+  border-radius: 8px;
+  /* 减小圆角 */
+  margin-bottom: 24px;
+  /* 减小与词汇详解的间距 */
+}
+
+.translation-section p {
+  margin: 16px 0 0;
+  /* 减小上边距 */
+}
+
+/* 词汇详解区域 */
+.vocabulary-section {
+  margin-top: 24px;
+  /* 减小与翻译结果的间距 */
+}
+
+.vocabulary-card {
+  background: var(--md-surface);
+  border-radius: 8px;
+  /* 减小圆角 */
+  padding: 24px;
+  /* 减小内边距 */
+}
+
+.vocab-cards {
+  gap: 16px;
+  /* 减小卡片间距 */
+  margin-top: 16px;
+  /* 减小顶部间距 */
+}
+
+.vocab-card {
+  padding: 16px;
+  /* 减小内边距 */
+}
+
+.vocab-card h4 {
+  margin: 0 0 16px 0;
+  /* 减小下边距 */
+}
+
+.definition-group {
+  margin-bottom: 16px;
+  /* 减小组间距 */
+}
+
+.definition-item {
+  margin-bottom: 12px;
+  /* 减小定义项间距 */
+}
+
+.examples {
+  margin: 8px 0 0 16px;
+  /* 减小缩进和间距 */
+  padding-left: 12px;
+}
+
+.examples li {
+  margin-bottom: 4px;
+  /* 减小例句间距 */
+}
+
+.examples li {
+  color: var(--md-text-secondary);
+  font-size: 14px;
+  margin-bottom: 6px;
+  font-style: italic;
+}
+
+/* Material Design 阴影 */
+.md-elevation-1 {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.md-elevation-2 {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* fallback */
+@font-face {
+  font-family: "Material Icons";
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/materialicons/v143/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2)
+    format("woff2");
+}
+
+.material-icons {
+  font-family: "Material Icons";
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  font-feature-settings: "liga";
+  -webkit-font-feature-settings: "liga";
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Material Icons 尺寸调整 */
+.material-icons {
+  font-size: 18px;
+  /* 减小图标大小 */
+  vertical-align: middle;
+  color: var(--md-primary);
+  opacity: 0.9;
+}
+
+/* 输入区域样式 */
+.input-area {
+  margin: 0 auto 16px;
+  max-width: 700px;
+  background: var(--md-surface);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.input-header {
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.input-tip {
+  color: var(--md-text-secondary);
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.md-textarea {
+  width: 100%;
+  padding: 16px;
+  border: none;
+  border-radius: 0;
+  /* 移除圆角，与外框融合 */
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--md-text-primary);
+  background: transparent;
+  resize: vertical;
+  transition: background-color 0.2s;
+  box-sizing: border-box;
+  min-height: 120px;
+  max-height: 400px;
+}
+
+.md-textarea:focus {
+  outline: none;
+  background-color: rgba(0, 0, 0, 0.01);
+}
+
+/* 翻译结果区域 */
+.translation-section {
+  max-width: 700px;
+  /* 与输入框保持一致 */
+  margin: 0 auto 24px;
+  background: var(--md-surface);
+  padding: 24px;
+  border-radius: 8px;
+}
+
+.translation-content {
+  padding: 16px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--md-text-primary);
+  border-radius: 4px;
+}
+
+/* 词汇详解区域 */
+.vocabulary-card {
+  max-width: 700px;
+  /* 与输入框保持一致 */
+  margin: 0 auto;
+  background: var(--md-surface);
+  border-radius: 8px;
+  padding: 24px;
+}
+
+/* 词汇详解样式优化 */
+.word-type {
+  margin-left: 16px;
+  margin-bottom: 12px;
+  color: var(--md-text-secondary);
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.definition-list {
+  margin-left: 32px;
+}
+
+.definition-item {
+  margin-bottom: 16px;
+}
+
+.definition {
+  margin: 0;
+  color: var(--md-text-primary);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.examples {
+  margin: 8px 0 0 16px;
+  padding-left: 12px;
+  border-left: 2px solid rgba(0, 0, 0, 0.08);
+}
+
+.examples li {
+  color: var(--md-text-secondary);
+  font-size: 14px;
+  margin-bottom: 6px;
+  font-style: italic;
+  line-height: 1.4;
+}
+
+/* section header样式 */
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.section-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--md-text-primary);
+}
+
+/* 分割线样式 */
+.section-divider {
+  border: none;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  margin: 16px 0;
+}
+
+.vocab-divider {
+  border: none;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  margin: 20px 0;
+  width: 100%;
+}
+
+/* 配置面板样式 */
+.config-panel {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--md-surface);
+  border-radius: 8px;
+  width: 90%;
+  max-width: 480px;
+  z-index: 1000;
+}
+
+.config-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 20px 24px;
+}
+
+.config-header h3 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--md-text-primary);
+}
+
+.config-content {
+  padding: 0 24px;
+}
+
+.config-item {
+  margin-bottom: 20px;
+}
+
+.config-item label {
+  display: block;
+  font-size: 14px;
+  color: var(--md-text-secondary);
+  margin-bottom: 8px;
+}
+
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--md-background);
+  border-radius: 4px;
+  padding: 0 12px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  transition: all 0.2s;
+}
+
+.input-wrapper:focus-within {
+  border-color: var(--md-primary);
+  box-shadow: 0 0 0 1px var(--md-primary);
+}
+
+.input-wrapper .material-icons {
+  font-size: 20px;
+  color: var(--md-text-secondary);
+}
+
+.input-wrapper input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 12px 0;
+  font-size: 15px;
+  color: var(--md-text-primary);
+  width: 100%;
+}
+
+.input-wrapper input:focus {
+  outline: none;
+}
+
+.config-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 16px 24px;
+}
+
+/* 消息提示样式 */
+.message {
+  position: fixed;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 12px 24px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.message.success {
+  background-color: #4caf50;
+  color: white;
+}
+
+.message.error {
+  background-color: var(--md-error);
+  color: white;
+}
+
+/* 消息动画 */
+.message-fade-enter-active,
+.message-fade-leave-active {
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.message-fade-enter-from,
+.message-fade-leave-to {
+  opacity: 0;
+  transform: translate(-50%, -20px);
+}

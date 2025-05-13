@@ -1,0 +1,22 @@
+/* Material Design 变量 - 全局CSS变量 */
+:root {
+  --md-primary: #2196f3;
+  /* 更鲜艳的蓝色 */
+  --md-primary-dark: #1976d2;
+  /* 深蓝色 */
+  --md-secondary: #00bcd4;
+  /* 青色作为次要色 */
+  --md-error: #f44336;
+  /* 更鲜艳的错误色 */
+  --md-text-primary: rgba(0, 0, 0, 0.87);
+  --md-text-secondary: rgba(0, 0, 0, 0.6);
+  --md-surface: #ffffff;
+  --md-background: #fafafa;
+  /* 更浅的背景色 */
+}
+
+/* 全局字体设置 */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+}
