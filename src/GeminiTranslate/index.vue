@@ -61,17 +61,17 @@ onMounted(() => {
 function saveSettings(): void {
   const success = updateConfig(config.value.apiKey, config.value.proxy, config.value.model);
   if (success) {
-    window.utools.showNotification('配置保存成功');
+    showNotification('配置保存成功');
     showConfig.value = false;
   } else {
-    window.utools.showNotification('配置保存失败');
+    showNotification('配置保存失败', 'error');
   }
 }
 
 async function handleTranslate(): Promise<void> {
   if (!sourceText.value.trim()) return;
   if (!config.value.apiKey) {
-    window.utools.showNotification('请先配置API密钥');
+    showNotification('请先配置API密钥', 'error');
     showConfig.value = true;
     return;
   }
@@ -82,7 +82,7 @@ async function handleTranslate(): Promise<void> {
     translationResult.value = JSON.parse(result);
   } catch (error) {
     console.error('翻译出错：', error);
-    window.utools.showNotification('翻译失败：' + (error as Error).message);
+    showNotification('翻译失败：' + (error as Error).message, 'error');
     translationResult.value = null;
   } finally {
     isTranslating.value = false;
@@ -98,6 +98,21 @@ function groupDefinitionsByType(definitions: Definition[]): Record<string, Defin
     groups[def.type].push(def);
     return groups;
   }, {} as Record<string, Definition[]>);
+}
+
+// 添加消息提示相关的响应式数据
+const showMessage = ref<boolean>(false);
+const messageText = ref<string>('');
+const messageType = ref<'success' | 'error'>('success');
+
+// 显示消息的函数
+function showNotification(text: string, type: 'success' | 'error' = 'success'): void {
+  messageText.value = text;
+  messageType.value = type;
+  showMessage.value = true;
+  setTimeout(() => {
+    showMessage.value = false;
+  }, 3000);
 }
 </script>
 
@@ -218,6 +233,13 @@ function groupDefinitionsByType(definitions: Definition[]): Record<string, Defin
         </div>
       </div>
     </div>
+
+    <!-- 消息提示组件 -->
+    <transition name="message-fade">
+      <div v-if="showMessage" :class="['message', messageType]">
+        {{ messageText }}
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -730,5 +752,45 @@ body {
   justify-content: flex-end;
   gap: 12px;
   padding: 16px 24px;
+}
+
+
+/* 消息提示样式 */
+.message {
+  position: fixed;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 12px 24px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.message.success {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.message.error {
+  background-color: var(--md-error);
+  color: white;
+}
+
+/* 消息动画 */
+.message-fade-enter-active,
+.message-fade-leave-active {
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.message-fade-enter-from,
+.message-fade-leave-to {
+  opacity: 0;
+  transform: translate(-50%, -20px);
 }
 </style>
