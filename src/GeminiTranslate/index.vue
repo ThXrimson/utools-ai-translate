@@ -26,7 +26,7 @@ interface TranslationResult {
   vocabulary?: VocabularyItem[];
 }
 
-defineProps({
+const props = defineProps({
   enterAction: {
     type: Object,
     required: true
@@ -46,15 +46,34 @@ const config = ref<Config>({
 });
 
 // 加载配置
+const debounceTimer = ref<number | null>(null);
+
+// 防抖处理函数
+function debounceTranslate(): void {
+  if (debounceTimer.value) {
+    clearTimeout(debounceTimer.value);
+  }
+  debounceTimer.value = window.setTimeout(() => {
+    handleTranslate();
+  }, 500); // 500ms 的延迟
+}
+
+// 在 onMounted 中修改
 onMounted(() => {
-  console.log('getCurrentConfig')
   const currentConfig = getCurrentConfig();
-  console.log(currentConfig);
   config.value = {
     apiKey: currentConfig.apiKey || '',
     proxy: currentConfig.proxy || '',
     model: currentConfig.model || 'gemini-2.0-flash'
   };
+  if (props.enterAction.type === 'over' && props.enterAction.payload) {
+    sourceText.value = props.enterAction.payload;
+    handleTranslate();
+  };
+  utools.setSubInput(({ text }) => {
+    sourceText.value = text;
+    debounceTranslate();
+  }, '翻译文本');
 });
 
 // 保存配置

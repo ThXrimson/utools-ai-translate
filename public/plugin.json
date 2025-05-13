@@ -10,7 +10,14 @@
     {
       "code": "gemini",
       "explain": "Gemini翻译功能",
-      "cmds": ["翻译", "translate", "gemini"]
+      "mainPush": true,
+      "cmds": [
+        "gemini",
+        {
+          "type": "over",
+          "label": "Gemini翻译"
+        }
+      ]
     }
   ]
 }
