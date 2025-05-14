@@ -1,4 +1,5 @@
 import axios from "axios";
+import { responseSchema } from "./schema.js";
 
 // 配置ID常量
 const CONFIG_ID = "gemini-translate/config";
@@ -47,54 +48,7 @@ async function geminiGenerate(text) {
     ],
     generationConfig: {
       responseMimeType: "application/json",
-      responseSchema: {
-        type: "object",
-        properties: {
-          text: {
-            type: "string",
-          },
-          translation: {
-            type: "string",
-          },
-          vocabulary: {
-            type: "array",
-            items: {
-              type: "object",
-              properties: {
-                text: {
-                  type: "string",
-                },
-                pronunciation: {
-                  type: "string",
-                },
-                definitions: {
-                  type: "array",
-                  items: {
-                    type: "object",
-                    properties: {
-                      definition: {
-                        type: "string",
-                      },
-                      type: {
-                        type: "string",
-                      },
-                      examples: {
-                        type: "array",
-                        items: {
-                          type: "string",
-                        },
-                      },
-                    },
-                    required: ["definition", "type", "examples"],
-                  },
-                },
-              },
-              required: ["definitions"],
-            },
-          },
-        },
-        required: ["text", "translation"],
-      },
+      responseSchema,
     },
   };
 
