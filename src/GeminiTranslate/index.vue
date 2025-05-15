@@ -87,7 +87,11 @@ function saveSettings(): void {
   }
 }
 
-async function handleTranslate(): Promise<void> {
+async function handleTranslate(event: KeyboardEvent): Promise<void> {
+  if (!(event.key === 'Enter' && event.shiftKey)) {
+    return;
+  }
+  event.preventDefault();
   if (!sourceText.value.trim()) return;
   if (!config.value.apiKey) {
     showNotification('请先配置API密钥', 'error');
@@ -157,7 +161,7 @@ function showNotification(text: string, type: 'success' | 'error' = 'success'): 
           <label>API密钥</label>
           <div class="input-wrapper">
             <span class="material-icons">key</span>
-            <input type="text" v-model="config.apiKey" placeholder="请输入Gemini API密钥" />
+            <input type="password" v-model="config.apiKey" placeholder="请输入Gemini API密钥" />
           </div>
         </div>
         <div class="config-item">
@@ -189,7 +193,7 @@ function showNotification(text: string, type: 'success' | 'error' = 'success'): 
           <span class="material-icons">edit</span>
           <span class="input-tip">输入文本</span>
         </div>
-        <textarea v-model="sourceText" placeholder="请输入要翻译的文本，支持英文和中文互译" rows="4" class="md-textarea"></textarea>
+        <textarea v-model="sourceText" placeholder="请输入要翻译的文本，支持英文和中文互译" rows="4" class="md-textarea" @keypress="handleTranslate"></textarea>
       </div>
 
       <!-- 翻译按钮 -->
